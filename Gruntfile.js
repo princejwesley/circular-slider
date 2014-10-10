@@ -26,7 +26,7 @@ module.exports = function(grunt) {
       },
       prefixed_css: {
         src: 'src/circular-slider.css',
-        dest: 'dist/circular-slider.css',
+        dest: 'dist/circular-slider.min.css',
       },
 	  
    },
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
 			keepSpecialComments: '*'
 		},
 		files: [{
-			src: 'dist/circular-slider.css',
+			src: 'dist/circular-slider.min.css',
 			dest: 'dist/circular-slider.min.css',
 			ext: '.min.css'
 		}]

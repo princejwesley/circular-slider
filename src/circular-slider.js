@@ -22,7 +22,7 @@ SOFTWARE.
 
 **/
 
-(function ($) {
+(function ($, undefined) {
  
 	"use strict";
     $.fn.CircularSlider = function( options ) { 
@@ -36,7 +36,11 @@ SOFTWARE.
 			min: 0,
 			max: 359,
 			value: 0,
-			onChange: function(value) {} 
+			clockwise: true,
+			labelSuffix: "",
+			labelPrefix: "",
+			slide: function(value) {},
+			formLabel : undefined
 		};
  
         var settings = $.extend({}, defaults, options );
@@ -47,6 +51,9 @@ SOFTWARE.
 			if(!Number.isInteger(settings.max)) throw "Invalid max value : " + settings.max;
 			if(settings.max < settings.min) throw "Invalid range : " + settings.max + "<" + settings.min;
 		
+			if(!settings.labelSuffix) settings.labelSuffix = defaults.labelSuffix;
+			if(!settings.labelPrefix) settings.labelPrefix = defaults.labelPrefix;
+			if(settings.formLabel && !$.isFunction(settings.formLabel)) settings.formLabel = defaults.formLabel;
 		};
 
 		validateSettings();
@@ -103,11 +110,16 @@ SOFTWARE.
 			var y = jcsCenter.y + jcsRadius * Math.sin(rad) - jcsBallRadius;
 			
 			jcsIndicator.css( { 'top' : y + "px", 'left' : x + "px" });			
-			jcsValue.text(deg2Val(d360));
-			if(settings.onChange && $.isFunction(settings.onChange)) settings.onChange(d360);
+			
+			var val = settings.clockwise ? deg2Val(d360) : (settings.max - deg2Val(d360));
+			jcsValue.html(buildLabel(val));
+			if(settings.slide && $.isFunction(settings.slide)) settings.slide(val);
         
-		});
-
+		});	
+		
+		var buildLabel = function(value) {
+			return settings.labelPrefix + (settings.formLabel ? settings.formLabel(value) : value) + settings.labelSuffix;
+		};
 		
 		var deg2Val = function(deg) {
 			if(deg < 0 || deg > 359) 
@@ -128,7 +140,11 @@ SOFTWARE.
  
 		var setValue = function(value) {
 		
-			var d360 = val2Deg(value);
+			if(!Number.isInteger(value)) throw "Invalid input (expected integer) : " + value;
+		
+			var val = settings.clockwise ? value : (settings.max - value);
+					
+			var d360 = val2Deg(val);
 			var rad = ((d360 - 90) % 360) * Math.PI / 180;
 			
 			var x = jcsCenter.x + jcsRadius * Math.cos(rad) - jcsBallRadius;
@@ -136,9 +152,9 @@ SOFTWARE.
 			
 			jcsIndicator.css('top', y + "px");
 			jcsIndicator.css('left', x + "px");			
-			jcsValue.text(value);
+			jcsValue.html(buildLabel(value));
 
-			if(settings.onChange && $.isFunction(settings.onChange)) settings.onChange(d360);
+			if(settings.slide && $.isFunction(settings.slide)) settings.slide(val);
 
 		};
  
