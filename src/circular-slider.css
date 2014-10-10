@@ -38,6 +38,7 @@ SOFTWARE.
     position: absolute;
     border-style: none;
     border-radius: 100%;
+	border: 2px solid rgb(236, 248, 212);
 	text-align : center;
 	pointer-events: none;
 	line-height: 4em;
@@ -48,10 +49,9 @@ SOFTWARE.
 .jcs-indicator {
     
     position: absolute;
-    width: 10%;
-    height: 10%;
     border-radius: 100%;
     background-color: deeppink;
+	border: 1px solid rgb(177, 177, 177);
     pointer-events: none;
     -moz-box-sizing: border-box;
          box-sizing: border-box;

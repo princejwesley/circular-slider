@@ -31,6 +31,195 @@ SOFTWARE.
 		
 		if(slider.find('div.jcs-panel').length !== 0) throw "Already Created!!!";
 		
+		var shapes =  {
+			"Circle" : { 
+				drawShape : function(jcs,jcsIndicator, jcsValue, radius) {
+					var rpx = radius + "px";
+					jcs.css({
+						'width' : rpx,
+						'height' : rpx,
+						'border-radius' : rpx 
+					});
+					
+					jcsIndicator.css({
+						'width' : (radius / 10) + "px",
+						'height' : (radius / 10) + "px",						
+					});
+					
+					jcsValue.css({ 
+						'width' : (radius / 2) + "px",
+						'height' : (radius / 2) + "px",
+						'font-size' : (radius / 8) + "px",
+						'top' : (radius / 5) + "px",
+						'left': (radius / 5) + "px",
+					});				
+				},
+				deg2Val : function(deg) {
+					if(deg < 0 || deg > 359) 
+						throw "Invalid angle " + deg;
+
+					deg = (deg + 90) % 360;
+					return Math.round(deg * ( range / 360) + settings.min);
+				},
+				val2Deg : function(value) {
+					if(value < settings.min || value > settings.max)
+						throw "Invalid range " + value;
+						
+					var nth =  value - settings.min;
+			
+					return (Math.round(nth * (360 / range)) - 90) % 360;	
+				},
+			},
+			"Half Circle":  {
+				drawShape : function(jcs,jcsIndicator, jcsValue, radius) {
+					jcs.css({
+						'width' : radius + "px",
+						'height' : (radius * 0.5) + "px",
+						'border-radius' :  radius + "px " + radius + "px 0 0",
+						'border-bottom' : 'none'
+					});
+					
+					jcsIndicator.css({
+						'width' : (radius / 10) + "px",
+						'height' : (radius / 10) + "px",						
+					});
+					
+					jcsValue.css({ 
+						'width' : (radius / 2) + "px",
+						'height' : (radius / 2) + "px",
+						'font-size' : (radius / 8) + "px",
+						'top' : (radius / 5) + "px",
+						'left': (radius / 5) + "px",
+					});				
+				},
+				deg2Val : function(deg) {
+					if(deg < 0 || deg > 359) 
+						throw "Invalid angle " + deg;
+						
+					deg = (deg + 180) % 360;
+					return Math.round(deg * ( range / 180) + settings.min);
+				},
+				val2Deg : function(value) {
+					if(value < settings.min || value > settings.max)
+						throw "Invalid range " + value;
+						
+					var nth =  value - settings.min;
+			
+					return (Math.round(nth * (180 / range)) - 180) % 360;	
+				},
+			},			
+			"Half Circle Left": {
+				drawShape : function(jcs,jcsIndicator, jcsValue, radius) {
+					jcs.css({
+						'height' : radius + "px",
+						'width' : (radius * 0.5) + "px",
+						'border-radius' :  radius + "px 0 0 " + radius + "px",
+						'border-right' : 'none'
+					});
+					
+					jcsIndicator.css({
+						'width' : (radius / 10) + "px",
+						'height' : (radius / 10) + "px",						
+					});
+					
+					jcsValue.css({ 
+						'width' : (radius / 2) + "px",
+						'height' : (radius / 2) + "px",
+						'font-size' : (radius / 8) + "px",
+						'top' : (radius / 5) + "px",
+						'left': (radius / 5) + "px",
+					});				
+				},
+				deg2Val : function(deg) {
+					if(deg < 0 || deg > 359) 
+						throw "Invalid angle " + deg;
+				
+					return Math.round(deg * ( range / 360) + settings.min);
+				},
+				val2Deg : function(value) {
+					if(value < settings.min || value > settings.max)
+						throw "Invalid range " + value;
+						
+					var nth =  value - settings.min;
+			
+					return Math.round(nth * (360 / range));	
+				},			
+			},
+			
+			"Half Circle Right": {
+				drawShape : function(jcs,jcsIndicator, jcsValue, radius) {
+					jcs.css({
+						'height' : radius + "px",
+						'width' : (radius * 0.5) + "px",
+						'border-radius' :  "0 " + radius + "px " + radius + "px 0",
+						'border-right' : 'none'
+					});
+					
+					jcsIndicator.css({
+						'width' : (radius / 10) + "px",
+						'height' : (radius / 10) + "px",						
+					});
+					
+					jcsValue.css({ 
+						'width' : (radius / 2) + "px",
+						'height' : (radius / 2) + "px",
+						'font-size' : (radius / 8) + "px",
+						'top' : (radius / 5) + "px",
+						'left': (radius / 5) + "px",
+					});				
+				},
+				deg2Val : function(deg) {
+					if(deg < 0 || deg > 359) 
+						throw "Invalid angle " + deg;
+				
+					return Math.round(deg * ( range / 360) + settings.min);
+				},
+				val2Deg : function(value) {
+					if(value < settings.min || value > settings.max)
+						throw "Invalid range " + value;
+						
+					var nth =  value - settings.min;
+			
+					return Math.round(nth * (360 / range));	
+				},			
+			},
+			"Half Circle Bottom": {
+				drawShape : function(jcs,jcsIndicator, jcsValue, radius) {
+					jcs.css({
+						'width' : radius + "px",
+						'height' : (radius * 0.5) + "px",
+						'border-radius' :  "0 0 " + radius + "px " + radius + "px",
+						'border-top' : 'none'
+					});
+					
+					jcsIndicator.css({
+						'width' : (radius / 2) + "px",
+						'height' : (radius / 2) + "px",						
+					});
+					
+					jcsValue.css({ 
+						'font-size' : (radius / 8) + "px",
+						'top' : (radius / 4) + "px",
+						'left': (radius / 4) + "px",
+					});				
+				},
+				deg2Val : function(deg) {
+					if(deg < 0 || deg > 359) 
+						throw "Invalid angle " + deg;
+				
+					return Math.round(deg * ( range / 360) + settings.min);
+				},
+				val2Deg : function(value) {
+					if(value < settings.min || value > settings.max)
+						throw "Invalid range " + value;
+						
+					var nth =  value - settings.min;
+			
+					return Math.round(nth * (360 / range));	
+				},			
+			} 
+		};
+		
 		var defaults = {
 			radius: 200,
 			min: 0,
@@ -39,6 +228,7 @@ SOFTWARE.
 			clockwise: true,
 			labelSuffix: "",
 			labelPrefix: "",
+			shape: "Circle",
 			slide: function(value) {},
 			formLabel : undefined
 		};
@@ -54,6 +244,9 @@ SOFTWARE.
 			if(!settings.labelSuffix) settings.labelSuffix = defaults.labelSuffix;
 			if(!settings.labelPrefix) settings.labelPrefix = defaults.labelPrefix;
 			if(settings.formLabel && !$.isFunction(settings.formLabel)) settings.formLabel = defaults.formLabel;
+			
+			if(!settings.shape) settings.shape = defaults.shape;
+			if(!shapes[settings.shape]) throw "Invalid shape : " + settings.shape;
 		};
 
 		validateSettings();
@@ -66,10 +259,10 @@ SOFTWARE.
 		var radius = Math.abs(parseInt(settings.radius)) || defaults.radius;		 
 		var jcs = jcsPanel.find('div.jcs');
 		var jcsIndicator = jcsPanel.find('div.jcs-indicator');
-		jcs.width(radius);
-		jcs.height(radius);
-
 		var jcsValue = jcsPanel.find('span.jcs-value');
+		
+		shapes[settings.shape].drawShape(jcs, jcsIndicator, jcsValue, radius);
+				
 		var jcsPosition = jcs.position();	
 		var jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
 		var jcsBallOuterArea = jcsIndicator.outerWidth() - jcsIndicator.innerWidth();
@@ -77,15 +270,7 @@ SOFTWARE.
 		var jcsBallRadius = (jcsIndicator.width() + jcsBallOuterArea) / 2;
 		var jcsCenter = { x : jcsPosition.left + jcsRadius, y : jcsPosition.top + jcsRadius };        
 		
-		// calculate jcs-value position
-		
-		jcsValue.width(radius / 2);
-		jcsValue.height(radius / 2);
-		jcsValue.css({ 
-			'font-size' : (radius / 8) + "px",
-			'top' : (radius / 4) + "px",
-			'left': (radius / 4) + "px",
-		});
+
 		
 		// event binding
 		var mouseDown = false;
@@ -102,7 +287,7 @@ SOFTWARE.
 			var rad = Math.atan2(dy, dx);
 			var deg = rad * 180 / Math.PI;
 			var rdeg = parseInt(deg);
-			var d360 = (parseInt(deg < 0 ? 360 + deg : deg) + 90) % 360;
+			var d360 = (parseInt(deg < 0 ? 360 + deg : deg)) % 360;
 			
 			// change coordinate
 			
@@ -111,32 +296,17 @@ SOFTWARE.
 			
 			jcsIndicator.css( { 'top' : y + "px", 'left' : x + "px" });			
 			
-			var val = settings.clockwise ? deg2Val(d360) : (settings.max - deg2Val(d360));
+			var d2v = shapes[settings.shape].deg2Val(d360);
+			var val = settings.clockwise ? d2v : (settings.max - d2v);
 			jcsValue.html(buildLabel(val));
 			if(settings.slide && $.isFunction(settings.slide)) settings.slide(val);
         
 		});	
 		
 		var buildLabel = function(value) {
+			settings.value = value;
 			return settings.labelPrefix + (settings.formLabel ? settings.formLabel(value) : value) + settings.labelSuffix;
-		};
-		
-		var deg2Val = function(deg) {
-			if(deg < 0 || deg > 359) 
-				throw "Invalid angle " + deg;
-				
-			return Math.round(deg * ( range / 360) + settings.min);
-		};
-		 
-		var val2Deg = function(value) {
-			if(value < settings.min || value > settings.max)
-				throw "Invalid range " + value;
-						
-			var nth =  value - settings.min;
-			
-			return Math.round(nth * (360 / range));	
-		};
-		
+		};		
  
 		var setValue = function(value) {
 		
@@ -144,8 +314,8 @@ SOFTWARE.
 		
 			var val = settings.clockwise ? value : (settings.max - value);
 					
-			var d360 = val2Deg(val);
-			var rad = ((d360 - 90) % 360) * Math.PI / 180;
+			var d360 = shapes[settings.shape].val2Deg(val);
+			var rad = d360 * Math.PI / 180;
 			
 			var x = jcsCenter.x + jcsRadius * Math.cos(rad) - jcsBallRadius;
 			var y = jcsCenter.y + jcsRadius * Math.sin(rad) - jcsBallRadius;
@@ -157,12 +327,20 @@ SOFTWARE.
 			if(settings.slide && $.isFunction(settings.slide)) settings.slide(val);
 
 		};
+		
+		var getValue = function() { return settings.value; };
+ 
+ 
+ 		var getSupportedShapes = function() { return Object.keys(); };
+
  
 		// default position
 		setValue(settings.value || settings.min);
  
 		return $.extend({}, this, {
 			"setValue" : setValue,
+			"getValue" : getValue,
+			"getSupportedShapes" : getSupportedShapes,
 		});
 				
     };
