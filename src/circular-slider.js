@@ -54,12 +54,15 @@ SOFTWARE.
 						'left': (radius / 5) + "px",
 					});				
 				},
+				getCenter: function(jcsPosition, jcsRadius){
+					return { x : jcsPosition.left + jcsRadius, y : jcsPosition.top + jcsRadius };		
+				},
 				deg2Val : function(deg) {
 					if(deg < 0 || deg > 359) 
 						throw "Invalid angle " + deg;
 
 					deg = (deg + 90) % 360;
-					return Math.round(deg * ( range / 360) + settings.min);
+					return Math.round(deg * ( range / 360.0)) + settings.min;
 				},
 				val2Deg : function(value) {
 					if(value < settings.min || value > settings.max)
@@ -67,7 +70,7 @@ SOFTWARE.
 						
 					var nth =  value - settings.min;
 			
-					return (Math.round(nth * (360 / range)) - 90) % 360;	
+					return (Math.round(nth * (360.0 / range)) - 90) % 360;	
 				},
 			},
 			"Half Circle":  {
@@ -92,12 +95,15 @@ SOFTWARE.
 						'left': (radius / 5) + "px",
 					});				
 				},
+				getCenter: function(jcsPosition, jcsRadius){
+					return { x : jcsPosition.left + jcsRadius, y : jcsPosition.top + jcsRadius };		
+				},
 				deg2Val : function(deg) {
 					if(deg < 0 || deg > 359) 
 						throw "Invalid angle " + deg;
 						
 					deg = (deg + 180) % 360;
-					return Math.round(deg * ( range / 180) + settings.min);
+					return Math.round(deg * ( range / 180.0)) + settings.min;
 				},
 				val2Deg : function(value) {
 					if(value < settings.min || value > settings.max)
@@ -105,7 +111,7 @@ SOFTWARE.
 						
 					var nth =  value - settings.min;
 			
-					return (Math.round(nth * (180 / range)) - 180) % 360;	
+					return (Math.round(nth * (180.0 / range)) - 180) % 360;	
 				},
 			},			
 			"Half Circle Left": {
@@ -130,11 +136,14 @@ SOFTWARE.
 						'left': (radius / 5) + "px",
 					});				
 				},
+				getCenter: function(jcsPosition, jcsRadius){
+					return { x : jcsPosition.left, y : jcsPosition.top + jcsRadius };		
+				},
 				deg2Val : function(deg) {
 					if(deg < 0 || deg > 359) 
 						throw "Invalid angle " + deg;
 				
-					return Math.round(deg * ( range / 360) + settings.min);
+					return Math.round(deg * ( range / 360.0)) + settings.min;
 				},
 				val2Deg : function(value) {
 					if(value < settings.min || value > settings.max)
@@ -142,7 +151,7 @@ SOFTWARE.
 						
 					var nth =  value - settings.min;
 			
-					return Math.round(nth * (360 / range));	
+					return Math.round(nth * (360.0 / range));	
 				},			
 			},
 			
@@ -168,11 +177,14 @@ SOFTWARE.
 						'left': (radius / 5) + "px",
 					});				
 				},
+				getCenter: function(jcsPosition, jcsRadius){
+					return { x : jcsPosition.left, y : jcsPosition.top + jcsRadius };		
+				},
 				deg2Val : function(deg) {
 					if(deg < 0 || deg > 359) 
 						throw "Invalid angle " + deg;
 				
-					return Math.round(deg * ( range / 360) + settings.min);
+					return Math.round(deg * ( range / 360.0)) + settings.min;
 				},
 				val2Deg : function(value) {
 					if(value < settings.min || value > settings.max)
@@ -180,7 +192,7 @@ SOFTWARE.
 						
 					var nth =  value - settings.min;
 			
-					return Math.round(nth * (360 / range));	
+					return Math.round(nth * (360.0 / range));	
 				},			
 			},
 			"Half Circle Bottom": {
@@ -193,21 +205,28 @@ SOFTWARE.
 					});
 					
 					jcsIndicator.css({
-						'width' : (radius / 2) + "px",
-						'height' : (radius / 2) + "px",						
+						'width' : (radius / 10) + "px",
+						'height' : (radius / 10) + "px",						
 					});
 					
 					jcsValue.css({ 
+						'width' : (radius / 2) + "px",
+						'height' : (radius / 2) + "px",
 						'font-size' : (radius / 8) + "px",
-						'top' : (radius / 4) + "px",
-						'left': (radius / 4) + "px",
+						'top' : "-" + (radius / 5) + "px",
+						'left': (radius / 5) + "px",
 					});				
+				},
+				getCenter: function(jcsPosition, jcsRadius){
+					return { x : jcsPosition.left + jcsRadius, y : jcsPosition.top };		
 				},
 				deg2Val : function(deg) {
 					if(deg < 0 || deg > 359) 
 						throw "Invalid angle " + deg;
-				
-					return Math.round(deg * ( range / 360) + settings.min);
+
+					console.log('hdown : ' + deg);
+
+					return Math.round(deg * ( range / 180.0)) + settings.min;
 				},
 				val2Deg : function(value) {
 					if(value < settings.min || value > settings.max)
@@ -215,8 +234,8 @@ SOFTWARE.
 						
 					var nth =  value - settings.min;
 			
-					return Math.round(nth * (360 / range));	
-				},			
+					return Math.round(nth * (180.0 / range));	
+				},
 			} 
 		};
 		
@@ -251,7 +270,7 @@ SOFTWARE.
 
 		validateSettings();
 		
-		var range = settings.max - settings.min + 1;
+		var range = settings.max - settings.min;
 						
 		var jcsPanel = $('<div class="jcs-panel"><div class="jcs"><span class="jcs-value"></span></div><div class="jcs-indicator"> </div></div>');
 		jcsPanel.appendTo(slider);
@@ -268,8 +287,7 @@ SOFTWARE.
 		var jcsBallOuterArea = jcsIndicator.outerWidth() - jcsIndicator.innerWidth();
 		var jcsRadius = (jcs.width() + jcsOuterArea) / 2;
 		var jcsBallRadius = (jcsIndicator.width() + jcsBallOuterArea) / 2;
-		var jcsCenter = { x : jcsPosition.left + jcsRadius, y : jcsPosition.top + jcsRadius };        
-		
+		var jcsCenter = shapes[settings.shape].getCenter(jcsPosition, jcsRadius) ;
 
 		
 		// event binding
