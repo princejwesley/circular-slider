@@ -1,6 +1,6 @@
 /*! The MIT License (MIT)
 
-Copyright (c) 2014 Prince John Wesley
+Copyright (c) 2014 Prince John Wesley <princejohnwesley@gmail.com>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -269,6 +269,7 @@ SOFTWARE.
             labelSuffix: "",
             labelPrefix: "",
             shape: "Circle",
+			touch: true,
             slide: function(value) {},
             formLabel: undefined
         };
@@ -386,7 +387,41 @@ SOFTWARE.
             return Object.keys();
         };
 
+		
+		var touchHandler = function(e) {
+			var touches = e.changedTouches;
+			
+			// Ignore multi-touch
+			if(touches.length > 1) return;
+			
+			var touch = touches[0];
+			var events = ["touchstart", "touchmove", "touchend"];
+			var mouseEvents = ["mousedown", "mousemove", "mouseup"];
+			var ev = events.indexOf(e.type); 
+			
+			if( ev == -1) return;
+			
+			var type = mouseEvents(ev);
+			
+			var simulatedEvent = document.createEvent("MouseEvent");
+			simulatedEvent.initMouseEvent(type, true, true, window, 1, 
+                              touch.screenX, touch.screenY, 
+                              touch.clientX, touch.clientY, false, 
+                              false, false, false, 0, null);
+			touch.target.dispatchEvent(simulatedEvent);
+			e.preventDefault();
+		};
+		
+		// bind touch events to mouse events
+		if(settings.touch) {
+			
+			document.addEventListener("touchstart", touchHandler, true);
+			document.addEventListener("touchmove", touchHandler, true);
+			document.addEventListener("touchend", touchHandler, true);
+			document.addEventListener("touchcancel", touchHandler, true);
 
+		}
+		
         // default position
         setValue(settings.value || settings.min);
 
