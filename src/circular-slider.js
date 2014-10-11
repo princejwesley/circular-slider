@@ -245,8 +245,6 @@ SOFTWARE.
                     if (deg < 0 || deg > 359)
                         throw "Invalid angle " + deg;
 
-                    console.log('hdown : ' + deg);
-
                     return Math.round(deg * (range / 180.0)) + settings.min;
                 },
                 val2Deg: function(value) {
@@ -270,7 +268,7 @@ SOFTWARE.
             labelPrefix: "",
             shape: "Circle",
 			touch: true,
-            slide: function(value) {},
+            slide: function(ui, value) {},
             formLabel: undefined
         };
 
@@ -349,7 +347,7 @@ SOFTWARE.
             var d2v = shapes[settings.shape].deg2Val(d360);
             var val = settings.clockwise ? d2v : (settings.max - d2v);
             jcsValue.html(buildLabel(val));
-            if (settings.slide && $.isFunction(settings.slide)) settings.slide(val);
+            if (settings.slide && $.isFunction(settings.slide)) settings.slide(slider, val);
 
         });
 
@@ -374,7 +372,7 @@ SOFTWARE.
             jcsIndicator.css('left', x + "px");
             jcsValue.html(buildLabel(value));
 
-            if (settings.slide && $.isFunction(settings.slide)) settings.slide(val);
+            if (settings.slide && $.isFunction(settings.slide)) settings.slide(slider, val);
 
         };
 
