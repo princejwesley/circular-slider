@@ -261,7 +261,7 @@ SOFTWARE.
         };
 
         var defaults = {
-            radius: 200,
+            radius: 150,
             min: 0,
             max: 359,
             value: 0,
@@ -278,8 +278,8 @@ SOFTWARE.
 
         var validateSettings = function() {
 
-            if (!Number.isInteger(settings.min)) throw "Invalid min value : " + settings.min;
-            if (!Number.isInteger(settings.max)) throw "Invalid max value : " + settings.max;
+            if ((settings.min |0) !== settings.min) throw "Invalid min value : " + settings.min;
+            if ((settings.max |0) !== settings.max) throw "Invalid max value : " + settings.max;
             if (settings.max < settings.min) throw "Invalid range : " + settings.max + "<" + settings.min;
 
             if (!settings.labelSuffix) settings.labelSuffix = defaults.labelSuffix;
@@ -324,8 +324,8 @@ SOFTWARE.
             if (!mouseDown) return;
 
             var cursor = {
-                x: e.offsetX,
-                y: e.offsetY
+                x: e.offsetX || e.originalEvent.layerX,
+                y: e.offsetY || e.originalEvent.layerY
             };
 
             var dx = cursor.x - jcsCenter.x;
@@ -360,7 +360,7 @@ SOFTWARE.
 
         var setValue = function(value) {
 
-            if (!Number.isInteger(value)) throw "Invalid input (expected integer) : " + value;
+            if (((value | 0) !== value)) throw "Invalid input (expected integer) : " + value;
 
             var val = settings.clockwise ? value : (settings.max - value);
 
