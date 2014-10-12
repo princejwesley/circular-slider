@@ -290,7 +290,7 @@ SOFTWARE.
 
         validateSettings();
 
-        var range = settings.max - settings.min;
+        var range = settings.max - settings.min + 1;
 
         var jcsPanel = $('<div class="jcs-panel"><div class="jcs"><span class="jcs-value"></span></div><div class="jcs-indicator"> </div></div>');
         jcsPanel.appendTo(slider);
@@ -330,9 +330,8 @@ SOFTWARE.
             var dy = cursor.y - jcsCenter.y;
 
             var rad = Math.atan2(dy, dx);
-            var deg = rad * 180 / Math.PI;
-            var rdeg = parseInt(deg);
-            var d360 = (parseInt(deg < 0 ? 360 + deg : deg)) % 360;
+            var deg = rad * 180.0 / Math.PI;
+            var d360 = (parseInt(deg < 0 ? 360.0 + deg : deg)) % 360;
 
             // change coordinate
 

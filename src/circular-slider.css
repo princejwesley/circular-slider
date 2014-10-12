@@ -59,5 +59,6 @@ SOFTWARE.
 }
 .jcs-panel {
     position: relative;
+    display: inline-block;
 }
 
