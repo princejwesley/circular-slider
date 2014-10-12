@@ -1,4 +1,8 @@
 circular-slider
 ===============
 
-Circular Slider - A JQuery plugin (Under development)
+Circular Slider - A JQuery plugin 
+
+Demo Page - TODO
+
+Documentation - TODO
