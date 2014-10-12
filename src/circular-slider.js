@@ -349,6 +349,10 @@ SOFTWARE.
 
             var d2v = shapes[settings.shape].deg2Val(d360);
             var val = settings.clockwise ? d2v : (settings.max - d2v);
+
+			if(val < settings.min) val = settings.min;
+			else if(val > settings.max) val = settings.max;
+
             jcsValue.html(buildLabel(val));
             if (settings.slide && $.isFunction(settings.slide)) settings.slide(slider, val);
 
