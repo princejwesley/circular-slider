@@ -278,7 +278,11 @@ SOFTWARE.
 
             if ((settings.min |0) !== settings.min) throw "Invalid min value : " + settings.min;
             if ((settings.max |0) !== settings.max) throw "Invalid max value : " + settings.max;
+            if ((settings.value |0) !== settings.value) throw "Invalid initial value : " + settings.value;
             if (settings.max < settings.min) throw "Invalid range : " + settings.max + "<" + settings.min;
+
+            if(settings.value < settings.min) settings.value = settings.min;
+            if(settings.value > settings.max) settings.value = settings.max;
 
             if (!settings.labelSuffix) settings.labelSuffix = defaults.labelSuffix;
             if (!settings.labelPrefix) settings.labelPrefix = defaults.labelPrefix;
