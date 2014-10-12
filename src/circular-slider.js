@@ -353,7 +353,7 @@ SOFTWARE.
 
         var buildLabel = function(value) {
             settings.value = value;
-            return settings.labelPrefix + (settings.formLabel ? settings.formLabel(value) : value) + settings.labelSuffix;
+            return settings.formLabel ? settings.formLabel(value, settings.labelPrefix, settings.labelSuffix) : settings.labelPrefix + value + settings.labelSuffix;
         };
 
         var setValue = function(value) {
