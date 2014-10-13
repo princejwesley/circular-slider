@@ -199,8 +199,8 @@ SOFTWARE.
                 deg2Val: function(deg) {
                     if (deg < 0 || deg > 359)
                         throw "Invalid angle " + deg;
-						
-					deg = (deg + 90) % 360;
+
+                    deg = (deg + 90) % 360;
                     return Math.round(deg * (range / 180.0)) + settings.min;
                 },
                 val2Deg: function(value) {
@@ -209,7 +209,7 @@ SOFTWARE.
 
                     var nth = value - settings.min;
 
-                    return (Math.round(nth * (180.0 / range)) - 90 ) % 360;
+                    return (Math.round(nth * (180.0 / range)) - 90) % 360;
                 },
             },
             "Half Circle Bottom": {
@@ -267,7 +267,8 @@ SOFTWARE.
             labelSuffix: "",
             labelPrefix: "",
             shape: "Circle",
-			touch: true,
+            touch: true,
+			selectable: true,
             slide: function(ui, value) {},
             formLabel: undefined
         };
@@ -276,13 +277,13 @@ SOFTWARE.
 
         var validateSettings = function() {
 
-            if ((settings.min |0) !== settings.min) throw "Invalid min value : " + settings.min;
-            if ((settings.max |0) !== settings.max) throw "Invalid max value : " + settings.max;
-            if ((settings.value |0) !== settings.value) throw "Invalid initial value : " + settings.value;
+            if ((settings.min | 0) !== settings.min) throw "Invalid min value : " + settings.min;
+            if ((settings.max | 0) !== settings.max) throw "Invalid max value : " + settings.max;
+            if ((settings.value | 0) !== settings.value) throw "Invalid initial value : " + settings.value;
             if (settings.max < settings.min) throw "Invalid range : " + settings.max + "<" + settings.min;
 
-            if(settings.value < settings.min) settings.value = settings.min;
-            if(settings.value > settings.max) settings.value = settings.max;
+            if (settings.value < settings.min) settings.value = settings.min;
+            if (settings.value > settings.max) settings.value = settings.max;
 
             if (!settings.labelSuffix) settings.labelSuffix = defaults.labelSuffix;
             if (!settings.labelPrefix) settings.labelPrefix = defaults.labelPrefix;
@@ -350,8 +351,8 @@ SOFTWARE.
             var d2v = shapes[settings.shape].deg2Val(d360);
             var val = settings.clockwise ? d2v : (settings.max - d2v);
 
-			if(val < settings.min) val = settings.min;
-			else if(val > settings.max) val = settings.max;
+            if (val < settings.min) val = settings.min;
+            else if (val > settings.max) val = settings.max;
 
             jcsValue.html(buildLabel(val));
             if (settings.slide && $.isFunction(settings.slide)) settings.slide(slider, val);
@@ -392,40 +393,42 @@ SOFTWARE.
             return Object.keys();
         };
 
-		
-		var touchHandler = function(e) {
-			var touches = e.changedTouches;
-			
-			// Ignore multi-touch
-			if(touches.length > 1) return;
-			
-			var touch = touches[0];
-			var events = ["touchstart", "touchmove", "touchend"];
-			var mouseEvents = ["mousedown", "mousemove", "mouseup"];
-			var ev = events.indexOf(e.type); 
-			
-			if( ev == -1) return;
-			
-			var type = mouseEvents(ev);
-			
-			var simulatedEvent = document.createEvent("MouseEvent");
-			simulatedEvent.initMouseEvent(type, true, true, window, 1, 
-                              touch.screenX, touch.screenY, 
-                              touch.clientX, touch.clientY, false, 
-                              false, false, false, 0, null);
-			touch.target.dispatchEvent(simulatedEvent);
-			e.preventDefault();
-		};
-		
-		// bind touch events to mouse events
-		if(settings.touch) {
-			
-			document.addEventListener("touchstart", touchHandler, true);
-			document.addEventListener("touchmove", touchHandler, true);
-			document.addEventListener("touchend", touchHandler, true);
-			document.addEventListener("touchcancel", touchHandler, true);
 
-		}
+        var touchHandler = function(e) {
+            var touches = e.changedTouches;
+
+            // Ignore multi-touch
+            if (touches.length > 1) return;
+
+            var touch = touches[0];
+            var events = ["touchstart", "touchmove", "touchend"];
+            var mouseEvents = ["mousedown", "mousemove", "mouseup"];
+            var ev = events.indexOf(e.type);
+
+            if (ev == -1) return;
+
+            var type = mouseEvents(ev);
+
+            var simulatedEvent = document.createEvent("MouseEvent");
+            simulatedEvent.initMouseEvent(type, true, true, window, 1,
+                touch.screenX, touch.screenY,
+                touch.clientX, touch.clientY, false,
+                false, false, false, 0, null);
+            touch.target.dispatchEvent(simulatedEvent);
+            e.preventDefault();
+        };
+
+        // bind touch events to mouse events
+        if (settings.touch) {
+
+            document.addEventListener("touchstart", touchHandler, true);
+            document.addEventListener("touchmove", touchHandler, true);
+            document.addEventListener("touchend", touchHandler, true);
+            document.addEventListener("touchcancel", touchHandler, true);
+
+        }
+
+		if(!settings.selectable) jcsPanel.addClass('noselect');
 		
         // default position
         setValue(settings.value || settings.min);
