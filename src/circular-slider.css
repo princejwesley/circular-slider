@@ -65,6 +65,7 @@ SOFTWARE.
 
 .jcs-value img {
     border-radius: 100%;
+    background: transparent;
 	width: inherit;
 	height: inherit;
 }
