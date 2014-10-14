@@ -65,6 +65,8 @@ SOFTWARE.
 
 .jcs-value img {
     border-radius: 100%;
+	width: inherit;
+	height: inherit;
 }
 
 .noselect {

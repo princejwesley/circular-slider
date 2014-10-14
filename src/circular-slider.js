@@ -30,29 +30,34 @@ SOFTWARE.
 
         if (slider.find('div.jcs-panel').length !== 0) throw "Already Created!!!";
 
-        var shapes = {
+        var drawIndicatorBall = function(jcsIndicator, radius) {
+            jcsIndicator.css({
+                'width': (radius / 5) + "px",
+                'height': (radius / 5) + "px",
+            });
+        };
+
+        var shapes = {            
             "Circle": {
                 drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
-                    var rpx = radius + "px";
+                    var rpx = (radius * 2) + "px";
                     jcs.css({
                         'width': rpx,
                         'height': rpx,
                         'border-radius': rpx
                     });
-
-                    jcsIndicator.css({
-                        'width': (radius / 10) + "px",
-                        'height': (radius / 10) + "px",
-                    });
-
+                    
+                    var outerArea = (jcs.outerWidth() - jcs.innerWidth()) + (jcsValue.outerWidth() - jcsValue.innerWidth());
+                    var iRadius = settings.innerCircleRatio * radius;
+                    var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                        'width': (radius / 2) + "px",
-                        'height': (radius / 2) + "px",
-                        'font-size': (radius / 8) + "px",
-                        'top': (radius / 5) + "px",
-                        'left': (radius / 5) + "px",
+                         'width': (iRadius * 2) + "px",
+                         'height': (iRadius * 2)+ "px",
+                         'font-size': iRadius / 2 + "px",
+                         'top': corner + "px",
+                         'left': corner + "px",
                     });
-                },
+               },
                 getCenter: function(jcsPosition, jcsRadius) {
                     return {
                         x: jcsPosition.left + jcsRadius,
@@ -78,24 +83,23 @@ SOFTWARE.
             },
             "Half Circle": {
                 drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
+                    var d = radius * 2;
                     jcs.css({
-                        'width': radius + "px",
-                        'height': (radius * 0.5) + "px",
-                        'border-radius': radius + "px " + radius + "px 0 0",
+                        'width': d + "px",
+                        'height': radius + "px",
+                        'border-radius': d + "px " + d + "px 0 0",
                         'border-bottom': 'none'
                     });
 
-                    jcsIndicator.css({
-                        'width': (radius / 10) + "px",
-                        'height': (radius / 10) + "px",
-                    });
-
+                    var outerArea = (jcs.outerWidth() - jcs.innerWidth()) + (jcsValue.outerWidth() - jcsValue.innerWidth());
+                    var iRadius = settings.innerCircleRatio * radius;
+                    var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                        'width': (radius / 2) + "px",
-                        'height': (radius / 2) + "px",
-                        'font-size': (radius / 8) + "px",
-                        'top': (radius / 5) + "px",
-                        'left': (radius / 5) + "px",
+                         'width': (iRadius * 2) + "px",
+                         'height': (iRadius * 2)+ "px",
+                         'font-size': iRadius / 2 + "px",
+                         'top': corner + "px",
+                         'left': corner + "px",
                     });
                 },
                 getCenter: function(jcsPosition, jcsRadius) {
@@ -123,24 +127,23 @@ SOFTWARE.
             },
             "Half Circle Left": {
                 drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
+                    var d = radius * 2;
                     jcs.css({
-                        'height': radius + "px",
-                        'width': (radius * 0.5) + "px",
-                        'border-radius': radius + "px 0 0 " + radius + "px",
+                        'height': d + "px",
+                        'width': radius + "px",
+                        'border-radius': d + "px 0 0 " + d + "px",
                         'border-right': 'none'
                     });
 
-                    jcsIndicator.css({
-                        'width': (radius / 10) + "px",
-                        'height': (radius / 10) + "px",
-                    });
-
+                    var outerArea = (jcs.outerWidth() - jcs.innerWidth()) + (jcsValue.outerWidth() - jcsValue.innerWidth());
+                    var iRadius = settings.innerCircleRatio * radius;
+                    var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                        'width': (radius / 2) + "px",
-                        'height': (radius / 2) + "px",
-                        'font-size': (radius / 8) + "px",
-                        'top': (radius / 5) + "px",
-                        'left': (radius / 5) + "px",
+                         'width': (iRadius * 2) + "px",
+                         'height': (iRadius * 2)+ "px",
+                         'font-size': iRadius / 2 + "px",
+                         'top': corner + "px",
+                         'left': corner + "px",
                     });
                 },
                 getCenter: function(jcsPosition, jcsRadius) {
@@ -169,24 +172,23 @@ SOFTWARE.
 
             "Half Circle Right": {
                 drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
+                    var d = radius * 2;
                     jcs.css({
-                        'height': radius + "px",
-                        'width': (radius * 0.5) + "px",
-                        'border-radius': "0 " + radius + "px " + radius + "px 0",
+                        'height': d + "px",
+                        'width': radius + "px",
+                        'border-radius': "0 " + d + "px " + d + "px 0",
                         'border-left': 'none'
                     });
 
-                    jcsIndicator.css({
-                        'width': (radius / 10) + "px",
-                        'height': (radius / 10) + "px",
-                    });
-
+                    var outerArea = (jcs.outerWidth() - jcs.innerWidth()) + (jcsValue.outerWidth() - jcsValue.innerWidth());
+                    var iRadius = settings.innerCircleRatio * radius;
+                    var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                        'width': (radius / 2) + "px",
-                        'height': (radius / 2) + "px",
-                        'font-size': (radius / 8) + "px",
-                        'top': (radius / 5) + "px",
-                        'left': "-" + (radius / 5) + "px",
+                         'width': (iRadius * 2) + "px",
+                         'height': (iRadius * 2)+ "px",
+                         'font-size': iRadius / 2 + "px",
+                         'top': corner + "px",
+                         'left': -corner + "px",
                     });
                 },
                 getCenter: function(jcsPosition, jcsRadius) {
@@ -214,24 +216,23 @@ SOFTWARE.
             },
             "Half Circle Bottom": {
                 drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
+                    var d = radius * 2;
                     jcs.css({
-                        'width': radius + "px",
-                        'height': (radius * 0.5) + "px",
-                        'border-radius': "0 0 " + radius + "px " + radius + "px",
+                        'width': d + "px",
+                        'height': radius + "px",
+                        'border-radius': "0 0 " + d + "px " + d + "px",
                         'border-top': 'none'
                     });
 
-                    jcsIndicator.css({
-                        'width': (radius / 10) + "px",
-                        'height': (radius / 10) + "px",
-                    });
-
+                    var outerArea = (jcs.outerWidth() - jcs.innerWidth()) + (jcsValue.outerWidth() - jcsValue.innerWidth());
+                    var iRadius = settings.innerCircleRatio * radius;
+                    var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                        'width': (radius / 2) + "px",
-                        'height': (radius / 2) + "px",
-                        'font-size': (radius / 8) + "px",
-                        'top': "-" + (radius / 5) + "px",
-                        'left': (radius / 5) + "px",
+                         'width': (iRadius * 2) + "px",
+                         'height': (iRadius * 2)+ "px",
+                         'font-size': iRadius / 2 + "px",
+                         'top': -corner + "px",
+                         'left': corner + "px",
                     });
                 },
                 getCenter: function(jcsPosition, jcsRadius) {
@@ -259,7 +260,8 @@ SOFTWARE.
         };
 
         var defaults = {
-            radius: 150,
+            radius: 75,
+            innerCircleRatio : '0.5',
             min: 0,
             max: 359,
             value: 0,
@@ -268,7 +270,7 @@ SOFTWARE.
             labelPrefix: "",
             shape: "Circle",
             touch: true,
-			selectable: true,
+            selectable: true,
             slide: function(ui, value) {},
             formLabel: undefined
         };
@@ -291,6 +293,9 @@ SOFTWARE.
 
             if (!settings.shape) settings.shape = defaults.shape;
             if (!shapes[settings.shape]) throw "Invalid shape : " + settings.shape;
+
+            if(!settings.innerCircleRatio || settings.innerCircleRatio < 0.1 || settings.innerCircleRatio > 0.9)
+                throw "Invalid innerCircleRatio. Expected: between 0.1 and 0.9, Found: " + settings.innerCircleRatio;
         };
 
         validateSettings();
@@ -305,7 +310,9 @@ SOFTWARE.
         var jcsIndicator = jcsPanel.find('div.jcs-indicator');
         var jcsValue = jcsPanel.find('span.jcs-value');
 
+        //draw circles
         shapes[settings.shape].drawShape(jcs, jcsIndicator, jcsValue, radius);
+        drawIndicatorBall(jcsIndicator, radius);
 
         var jcsPosition = jcs.position();
         var jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
@@ -428,8 +435,8 @@ SOFTWARE.
 
         }
 
-		if(!settings.selectable) jcsPanel.addClass('noselect');
-		
+        if(!settings.selectable) jcsPanel.addClass('noselect');
+        
         // default position
         setValue(settings.value || settings.min);
 
