@@ -30,8 +30,8 @@ SOFTWARE.
 
         if (slider.find('div.jcs-panel').length !== 0) throw "Already Created!!!";
 
-        var drawIndicatorBall = function(jcsIndicator, radius) {
-            jcsIndicator.css({
+        var drawIndicatorBall = function(jcsComponents, radius) {
+            jcsComponents.jcsIndicator.css({
                 'width': (radius / 5) + "px",
                 'height': (radius / 5) + "px",
             });
@@ -39,14 +39,26 @@ SOFTWARE.
 
         var shapes = {            
             "Circle": {
-                drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
-                    var rpx = (radius * 2) + "px";
+                drawShape: function(jcsComponents, radius) {
+                    var d = radius * 2;
+                    var rpx = d + "px";
+                    var jcs = jcsComponents.jcs;
+                    var jcsValue = jcsComponents.jcsValue;
+                    var jcsPanel = jcsComponents.jcsPanel;
+
                     jcs.css({
                         'width': rpx,
                         'height': rpx,
                         'border-radius': rpx
                     });
                     
+                    var pd = d + (radius / 10);
+
+                    jcsPanel.css({
+                        'border-width' : (radius / 10) + 'px',
+                        'border-radius': pd + 'px',
+                    });
+
                     var outerArea = (jcs.outerWidth() - jcs.innerWidth()) + (jcsValue.outerWidth() - jcsValue.innerWidth());
                     var iRadius = settings.innerCircleRatio * radius;
                     var corner = radius - iRadius - outerArea / 2;
@@ -82,14 +94,28 @@ SOFTWARE.
                 },
             },
             "Half Circle": {
-                drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
+                drawShape: function(jcsComponents, radius) {
                     var d = radius * 2;
+                    var jcs = jcsComponents.jcs;
+                    var jcsValue = jcsComponents.jcsValue;
+                    var jcsPanel = jcsComponents.jcsPanel;
+
+
                     jcs.css({
                         'width': d + "px",
                         'height': radius + "px",
                         'border-radius': d + "px " + d + "px 0 0",
                         'border-bottom': 'none'
                     });
+
+                    var pd = d + (radius / 10);
+
+                    jcsPanel.css({
+                        'border-width' : (radius / 10) + 'px',
+                        'border-radius': pd + "px " + pd + "px 0 0",
+                        'border-bottom': 'none'
+                    });
+
 
                     var outerArea = (jcs.outerWidth() - jcs.innerWidth()) + (jcsValue.outerWidth() - jcsValue.innerWidth());
                     var iRadius = settings.innerCircleRatio * radius;
@@ -126,12 +152,24 @@ SOFTWARE.
                 },
             },
             "Half Circle Left": {
-                drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
+                drawShape: function(jcsComponents, radius) {
                     var d = radius * 2;
+                    var jcs = jcsComponents.jcs;
+                    var jcsValue = jcsComponents.jcsValue;
+                    var jcsPanel = jcsComponents.jcsPanel;
+
                     jcs.css({
                         'height': d + "px",
                         'width': radius + "px",
                         'border-radius': d + "px 0 0 " + d + "px",
+                        'border-right': 'none'
+                    });
+
+                    var pd = d + (radius / 10);
+
+                    jcsPanel.css({
+                        'border-width' : (radius / 10) + 'px',
+                        'border-radius': pd + "px 0 0" + pd + "px",
                         'border-right': 'none'
                     });
 
@@ -171,12 +209,24 @@ SOFTWARE.
             },
 
             "Half Circle Right": {
-                drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
+                drawShape: function(jcsComponents, radius) {
                     var d = radius * 2;
+                    var jcs = jcsComponents.jcs;
+                    var jcsValue = jcsComponents.jcsValue;
+                    var jcsPanel = jcsComponents.jcsPanel;
+
                     jcs.css({
                         'height': d + "px",
                         'width': radius + "px",
                         'border-radius': "0 " + d + "px " + d + "px 0",
+                        'border-left': 'none'
+                    });
+
+                    var pd = d + (radius / 10);
+
+                    jcsPanel.css({
+                        'border-width' : (radius / 10) + 'px',
+                        'border-radius': "0 " + pd + "px" + pd + "px 0",
                         'border-left': 'none'
                     });
 
@@ -215,12 +265,24 @@ SOFTWARE.
                 },
             },
             "Half Circle Bottom": {
-                drawShape: function(jcs, jcsIndicator, jcsValue, radius) {
+                drawShape: function(jcsComponents, radius) {
                     var d = radius * 2;
+                    var jcs = jcsComponents.jcs;
+                    var jcsValue = jcsComponents.jcsValue;
+                    var jcsPanel = jcsComponents.jcsPanel;
+
                     jcs.css({
                         'width': d + "px",
                         'height': radius + "px",
                         'border-radius': "0 0 " + d + "px " + d + "px",
+                        'border-top': 'none'
+                    });
+
+                    var pd = d + (radius / 10);
+
+                    jcsPanel.css({
+                        'border-width' : (radius / 10) + 'px',
+                        'border-radius': "0 0 " + pd + "px " + pd + "px",
                         'border-top': 'none'
                     });
 
@@ -310,10 +372,16 @@ SOFTWARE.
         var jcsIndicator = jcsPanel.find('div.jcs-indicator');
         var jcsValue = jcsPanel.find('span.jcs-value');
 
+        var jcsComponents = {
+            'jcs' : jcs,
+            'jcsPanel' : jcsPanel,
+            'jcsIndicator' : jcsIndicator,
+            'jcsValue' : jcsValue
+        };
+
         //draw circles
-        shapes[settings.shape].drawShape(jcs, jcsIndicator, jcsValue, radius);
-        drawIndicatorBall(jcsIndicator, radius);
-        jcsPanel.css({'border-width' : (radius / 10) + 'px'});
+        shapes[settings.shape].drawShape(jcsComponents, radius);
+        drawIndicatorBall(jcsComponents, radius);
 
         var jcsPosition = jcs.position();
         var jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
