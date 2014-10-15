@@ -37,7 +37,7 @@ SOFTWARE.
             });
         };
 
-        var shapes = {            
+        var shapes = {
             "Circle": {
                 drawShape: function(jcsComponents, radius) {
                     var d = radius * 2;
@@ -51,11 +51,11 @@ SOFTWARE.
                         'height': rpx,
                         'border-radius': rpx
                     });
-                    
+
                     var pd = d + (radius / 10);
 
                     jcsPanel.css({
-                        'border-width' : (radius / 10) + 'px',
+                        'border-width': (radius / 10) + 'px',
                         'border-radius': pd + 'px',
                     });
 
@@ -63,13 +63,13 @@ SOFTWARE.
                     var iRadius = settings.innerCircleRatio * radius;
                     var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                         'width': (iRadius * 2) + "px",
-                         'height': (iRadius * 2)+ "px",
-                         'font-size': iRadius / 2 + "px",
-                         'top': corner + "px",
-                         'left': corner + "px",
+                        'width': (iRadius * 2) + "px",
+                        'height': (iRadius * 2) + "px",
+                        'font-size': iRadius / 2 + "px",
+                        'top': corner + "px",
+                        'left': corner + "px",
                     });
-               },
+                },
                 getCenter: function(jcsPosition, jcsRadius) {
                     return {
                         x: jcsPosition.left + jcsRadius,
@@ -111,7 +111,7 @@ SOFTWARE.
                     var pd = d + (radius / 10);
 
                     jcsPanel.css({
-                        'border-width' : (radius / 10) + 'px',
+                        'border-width': (radius / 10) + 'px',
                         'border-radius': pd + "px " + pd + "px 0 0",
                         'border-bottom': 'none'
                     });
@@ -121,11 +121,11 @@ SOFTWARE.
                     var iRadius = settings.innerCircleRatio * radius;
                     var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                         'width': (iRadius * 2) + "px",
-                         'height': (iRadius * 2)+ "px",
-                         'font-size': iRadius / 2 + "px",
-                         'top': corner + "px",
-                         'left': corner + "px",
+                        'width': (iRadius * 2) + "px",
+                        'height': (iRadius * 2) + "px",
+                        'font-size': iRadius / 2 + "px",
+                        'top': corner + "px",
+                        'left': corner + "px",
                     });
                 },
                 getCenter: function(jcsPosition, jcsRadius) {
@@ -168,7 +168,7 @@ SOFTWARE.
                     var pd = d + (radius / 10);
 
                     jcsPanel.css({
-                        'border-width' : (radius / 10) + 'px',
+                        'border-width': (radius / 10) + 'px',
                         'border-radius': pd + "px 0 0" + pd + "px",
                         'border-right': 'none'
                     });
@@ -177,11 +177,11 @@ SOFTWARE.
                     var iRadius = settings.innerCircleRatio * radius;
                     var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                         'width': (iRadius * 2) + "px",
-                         'height': (iRadius * 2)+ "px",
-                         'font-size': iRadius / 2 + "px",
-                         'top': corner + "px",
-                         'left': corner + "px",
+                        'width': (iRadius * 2) + "px",
+                        'height': (iRadius * 2) + "px",
+                        'font-size': iRadius / 2 + "px",
+                        'top': corner + "px",
+                        'left': corner + "px",
                     });
                 },
                 getCenter: function(jcsPosition, jcsRadius) {
@@ -225,7 +225,7 @@ SOFTWARE.
                     var pd = d + (radius / 10);
 
                     jcsPanel.css({
-                        'border-width' : (radius / 10) + 'px',
+                        'border-width': (radius / 10) + 'px',
                         'border-radius': "0 " + pd + "px" + pd + "px 0",
                         'border-left': 'none'
                     });
@@ -234,11 +234,11 @@ SOFTWARE.
                     var iRadius = settings.innerCircleRatio * radius;
                     var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                         'width': (iRadius * 2) + "px",
-                         'height': (iRadius * 2)+ "px",
-                         'font-size': iRadius / 2 + "px",
-                         'top': corner + "px",
-                         'left': -corner + "px",
+                        'width': (iRadius * 2) + "px",
+                        'height': (iRadius * 2) + "px",
+                        'font-size': iRadius / 2 + "px",
+                        'top': corner + "px",
+                        'left': -corner + "px",
                     });
                 },
                 getCenter: function(jcsPosition, jcsRadius) {
@@ -281,7 +281,7 @@ SOFTWARE.
                     var pd = d + (radius / 10);
 
                     jcsPanel.css({
-                        'border-width' : (radius / 10) + 'px',
+                        'border-width': (radius / 10) + 'px',
                         'border-radius': "0 0 " + pd + "px " + pd + "px",
                         'border-top': 'none'
                     });
@@ -290,11 +290,11 @@ SOFTWARE.
                     var iRadius = settings.innerCircleRatio * radius;
                     var corner = radius - iRadius - outerArea / 2;
                     jcsValue.css({
-                         'width': (iRadius * 2) + "px",
-                         'height': (iRadius * 2)+ "px",
-                         'font-size': iRadius / 2 + "px",
-                         'top': -corner + "px",
-                         'left': corner + "px",
+                        'width': (iRadius * 2) + "px",
+                        'height': (iRadius * 2) + "px",
+                        'font-size': iRadius / 2 + "px",
+                        'top': -corner + "px",
+                        'left': corner + "px",
                     });
                 },
                 getCenter: function(jcsPosition, jcsRadius) {
@@ -323,7 +323,7 @@ SOFTWARE.
 
         var defaults = {
             radius: 75,
-            innerCircleRatio : '0.5',
+            innerCircleRatio: '0.5',
             min: 0,
             max: 359,
             value: 0,
@@ -356,7 +356,7 @@ SOFTWARE.
             if (!settings.shape) settings.shape = defaults.shape;
             if (!shapes[settings.shape]) throw "Invalid shape : " + settings.shape;
 
-            if(!settings.innerCircleRatio || settings.innerCircleRatio < 0.1 || settings.innerCircleRatio > 0.9)
+            if (!settings.innerCircleRatio || settings.innerCircleRatio < 0.1 || settings.innerCircleRatio > 0.9)
                 throw "Invalid innerCircleRatio. Expected: between 0.1 and 0.9, Found: " + settings.innerCircleRatio;
         };
 
@@ -373,10 +373,10 @@ SOFTWARE.
         var jcsValue = jcsPanel.find('span.jcs-value');
 
         var jcsComponents = {
-            'jcs' : jcs,
-            'jcsPanel' : jcsPanel,
-            'jcsIndicator' : jcsIndicator,
-            'jcsValue' : jcsValue
+            'jcs': jcs,
+            'jcsPanel': jcsPanel,
+            'jcsIndicator': jcsIndicator,
+            'jcsValue': jcsValue
         };
 
         //draw circles
@@ -393,15 +393,7 @@ SOFTWARE.
 
         // event binding
         var mouseDown = false;
-        jcs.on('mousedown', function(e) {
-            mouseDown = true;
-            e.stopPropagation();
-        });
-        jcs.on('mouseup', function(e) {
-            mouseDown = false;
-            e.stopPropagation();
-        });
-        jcs.on('mousemove', function(e) {
+        var mousemoveHanlder = function(e) {
             e.stopPropagation();
             if (!mouseDown) return;
 
@@ -436,7 +428,39 @@ SOFTWARE.
             jcsValue.html(buildLabel(val));
             if (settings.slide && $.isFunction(settings.slide)) settings.slide(slider, val);
 
+        };
+
+
+
+        jcs.on('mousedown', function(e) {
+            mouseDown = true;
+            e.stopPropagation();
         });
+        jcs.on('mouseup', function(e) {
+            mouseDown = false;
+            e.stopPropagation();
+        });
+        jcs.on('mousemove', mousemoveHanlder);
+
+        jcs.on('click', function(e) {
+            e.stopPropagation();
+            var cursor = {
+                x: e.offsetX || e.originalEvent.layerX,
+                y: e.offsetY || e.originalEvent.layerY
+            };
+
+            var dx = cursor.x - jcsCenter.x;
+            var dy = cursor.y - jcsCenter.y;
+
+
+            var distance = Math.sqrt(dx * dx + dy * dy);
+            if (radius - distance <= jcsOuterArea) {
+                mouseDown = true;
+                mousemoveHanlder(e);
+            }
+            mouseDown = false;
+        });
+
 
         jcsPanel.on('mouseup', function(e) {
             jcs.trigger(e);
@@ -449,6 +473,7 @@ SOFTWARE.
         jcsPanel.on('mousedown', function(e) {
             jcs.trigger(e);
         });
+
 
 
 
@@ -498,7 +523,7 @@ SOFTWARE.
             var mouseEvents = ["mousedown", "mousemove", "mouseup"];
             var ev = events.indexOf(e.type);
 
-            if (ev == -1) return;
+            if (ev === -1) return;
 
             var type = mouseEvents(ev);
 
@@ -521,8 +546,8 @@ SOFTWARE.
 
         }
 
-        if(!settings.selectable) jcsPanel.addClass('noselect');
-        
+        if (!settings.selectable) jcsPanel.addClass('noselect');
+
         // default position
         setValue(settings.value || settings.min);
 
@@ -535,3 +560,4 @@ SOFTWARE.
     };
 
 }(jQuery));
+
