@@ -270,7 +270,7 @@ SOFTWARE.
             labelPrefix: "",
             shape: "Circle",
             touch: true,
-            selectable: true,
+            selectable: false,
             slide: function(ui, value) {},
             formLabel: undefined
         };
@@ -313,6 +313,7 @@ SOFTWARE.
         //draw circles
         shapes[settings.shape].drawShape(jcs, jcsIndicator, jcsValue, radius);
         drawIndicatorBall(jcsIndicator, radius);
+        jcsPanel.css({'border-width' : (radius / 10) + 'px'});
 
         var jcsPosition = jcs.position();
         var jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
@@ -326,11 +327,14 @@ SOFTWARE.
         var mouseDown = false;
         jcs.on('mousedown', function(e) {
             mouseDown = true;
+            e.stopPropagation();
         });
         jcs.on('mouseup', function(e) {
             mouseDown = false;
+            e.stopPropagation();
         });
         jcs.on('mousemove', function(e) {
+            e.stopPropagation();
             if (!mouseDown) return;
 
             var cursor = {
@@ -365,6 +369,20 @@ SOFTWARE.
             if (settings.slide && $.isFunction(settings.slide)) settings.slide(slider, val);
 
         });
+
+        jcsPanel.on('mouseup', function(e) {
+            jcs.trigger(e);
+        });
+
+        jcsPanel.on('mousemove', function(e) {
+            jcs.trigger(e);
+        });
+
+        jcsPanel.on('mousedown', function(e) {
+            jcs.trigger(e);
+        });
+
+
 
         var buildLabel = function(value) {
             settings.value = value;

@@ -30,8 +30,8 @@ SOFTWARE.
     border-color: hotpink;
     -moz-box-sizing: border-box;
          box-sizing: border-box;
-	cursor: pointer;
     border-width: 5px;
+    cursor: pointer;
 }
 
 .jcs-value {
@@ -53,13 +53,16 @@ SOFTWARE.
     border-radius: 100%;
     background-color: deeppink;
 	border: 1px solid rgb(177, 177, 177);
-    pointer-events: none;
     -moz-box-sizing: border-box;
          box-sizing: border-box;
+    pointer-events : none;
 }
 .jcs-panel {
     position: relative;
     display: inline-block;
+    border-style: solid;
+    border-color: transparent;
+    cursor: pointer;
 }
 
 
