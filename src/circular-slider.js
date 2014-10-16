@@ -474,9 +474,6 @@ SOFTWARE.
             jcs.trigger(e);
         });
 
-
-
-
         var buildLabel = function(value) {
             settings.value = value;
             return settings.formLabel ? settings.formLabel(value, settings.labelPrefix, settings.labelSuffix) : settings.labelPrefix + value + settings.labelSuffix;
@@ -511,7 +508,7 @@ SOFTWARE.
             return Object.keys();
         };
 
-
+        var lastTouchType = '';
         var touchHandler = function(e) {
             var touches = e.changedTouches;
 
@@ -525,7 +522,11 @@ SOFTWARE.
 
             if (ev === -1) return;
 
-            var type = mouseEvents(ev);
+            var type = mouseEvents[ev];
+            if (e.type === events[2] && lastTouchType === events[0]) {
+                type = "click";
+            }
+
 
             var simulatedEvent = document.createEvent("MouseEvent");
             simulatedEvent.initMouseEvent(type, true, true, window, 1,
@@ -534,6 +535,7 @@ SOFTWARE.
                 false, false, false, 0, null);
             touch.target.dispatchEvent(simulatedEvent);
             e.preventDefault();
+            lastTouchType = e.type;
         };
 
         // bind touch events to mouse events
@@ -560,4 +562,3 @@ SOFTWARE.
     };
 
 }(jQuery));
-

@@ -109,8 +109,8 @@ var slider = $('#slider').CircularSlider({
 });
 ```
 
-#### CSS properties
-Use the below css properties for customization
+#### CSS classes
+Use the below css classes for customization
 > `.jcs-panel` - circular slider panel
 
 > `.jcs` - Slider area
@@ -127,12 +127,12 @@ var imageSlider = $('#slider-customized').CircularSlider({
 	radius: 100,
 	innerCircleRatio : .7,
 	formLabel : function(value, prefix, suffix) {
-		return '<img src="assets/images/baby'+ parseInt(value / 27)+'.png"></img>';
+		return '<img src="assets/images/baby'+ parseInt(value / 26)+'.png"></img>';
 	},
 	slide : function(ui, value) {
 		var colors = ['deeppink', 'seagreen', 'deepskyblue', 'coral', 'cadetblue', 'olive', 'chocolate',
         	'yellowgreen', 'cornflowerblue', 'slategrey', 'salmon', 'brown', 'darkgoldenrod', 'dimgrey'];
-		var color = colors[parseInt(value / 27)];
+		var color = colors[parseInt(value / 26)];
 		ui.find('.jcs').css({'border-color' : color });
 		ui.find('.jcs-indicator').css({'background' : color });
 	}
