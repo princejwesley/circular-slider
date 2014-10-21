@@ -1,4 +1,4 @@
-[circular-slider](www.toolitup.com/circular-slider.html) - A jQuery Plugin
+[circular-slider](http://www.toolitup.com/circular-slider.html) - A jQuery Plugin
 ===============
 Circular slider is a jQuery plugin which helps to slide range of values and images. It supports half(top/bottom/up/down) and full circle shapes.
 #####[Demo Page](http://www.toolitup.com/circular-slider.html)
@@ -127,7 +127,7 @@ Use the below css classes for customization
 
 > `.jcs-indicator` - Slide indicator ball
 
-### Advanced Usage ([image carousel](www.toolitup.com/circular-slider.html))
+### Advanced Usage ([image carousel](http://www.toolitup.com/circular-slider.html))
 ```javascript
 var imageSlider = $('#slider-customized').CircularSlider({
 	min : 0,
@@ -152,4 +152,4 @@ var imageSlider = $('#slider-customized').CircularSlider({
 ## License
 This plugin is licensed under the [MIT license](https://github.com/princejwesley/circular-slider/blob/master/LICENSE).
 
-Copyright (c) 2014 [Prince John Wesley](www.toolitup.com)
+Copyright (c) 2014 [Prince John Wesley](http://www.toolitup.com)
