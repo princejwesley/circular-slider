@@ -440,7 +440,8 @@ SOFTWARE.
                 unitDeg = (4 / r);
             }
 
-            //linear
+            //linear animation
+            // TODO: add easing effect
             var next = sd360;
             var count = parseInt(distance / unitDeg);
 
@@ -462,6 +463,7 @@ SOFTWARE.
 
         var mousemoveHanlder = function(e) {
             e.stopPropagation();
+
             if (!mouseDown || onAnimate) return;
 
             var cursor = {
@@ -516,9 +518,8 @@ SOFTWARE.
             var dx = cursor.x - jcsCenter.x;
             var dy = cursor.y - jcsCenter.y;
 
-
             var distance = Math.sqrt(dx * dx + dy * dy);
-            if (radius - distance <= jcsOuterArea) {
+            if (radius - distance <= jcsOuterArea || distance > radius) {
                 if(settings.animate) {
                     translate(e);
                 } else {

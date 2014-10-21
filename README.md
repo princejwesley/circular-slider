@@ -65,6 +65,12 @@ var slider = $('#slider').CircularSlider();
 ### touch
 > `touch` support. (default: *true*)
 
+### animate
+>linear `animation` support. (dafault: *true*)
+
+### animateDuration
+> Animation duration in milliseconds. (default: 360ms)
+
 ### selectable
 > text selection enabled or not. (default: *false*)
 
@@ -103,6 +109,8 @@ var slider = $('#slider').CircularSlider({
     labelPrefix: "",
     shape: "Circle",
     touch: true,
+    animate: true,
+    animateDuration : 360,
     selectable: false,
     slide: function(ui, value) {},
     formLabel: undefined
