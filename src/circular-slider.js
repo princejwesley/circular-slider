@@ -332,6 +332,8 @@ SOFTWARE.
             labelPrefix: "",
             shape: "Circle",
             touch: true,
+            animate: true,
+            animateDuration : 360,
             selectable: false,
             slide: function(ui, value) {},
             formLabel: undefined
@@ -358,6 +360,10 @@ SOFTWARE.
 
             if (!settings.innerCircleRatio || settings.innerCircleRatio < 0.1 || settings.innerCircleRatio > 0.9)
                 throw "Invalid innerCircleRatio. Expected: between 0.1 and 0.9, Found: " + settings.innerCircleRatio;
+
+            if (settings.animate && ((settings.animateDuration | 0) !== settings.animateDuration ||
+                settings.animateDuration < 0))
+                throw "Invalid animate duration(in ms) : " + settings.animateDuration;
         };
 
         validateSettings();
@@ -390,12 +396,73 @@ SOFTWARE.
         var jcsBallRadius = (jcsIndicator.width() + jcsBallOuterArea) / 2;
         var jcsCenter = shapes[settings.shape].getCenter(jcsPosition, jcsRadius);
 
-
         // event binding
         var mouseDown = false;
+        var onAnimate = false;
+
+
+        var translate = function(e) {
+
+            var cursor = {
+                x: e.offsetX || e.originalEvent.layerX,
+                y: e.offsetY || e.originalEvent.layerY
+            };
+
+            var dx = cursor.x - jcsCenter.x;
+            var dy = cursor.y - jcsCenter.y;
+
+            var rad = Math.atan2(dy, dx);
+            var deg = rad * 180.0 / Math.PI;
+            var d360 = (parseInt(deg < 0 ? 360.0 + deg : deg)) % 360;
+
+            // change coordinate
+
+            var x = jcsCenter.x + jcsCenter.r * Math.cos(rad) - jcsBallRadius;
+            var y = jcsCenter.y + jcsCenter.r * Math.sin(rad) - jcsBallRadius;
+
+            var sd360 = (shapes[settings.shape].val2Deg(settings.value) + 360) % 360;
+
+            if(sd360 === d360) return;
+
+            var distance = Math.min((d360 + 360 - sd360) % 360, (sd360 + 360 - d360) % 360);
+            if(!distance) distance = 180;
+
+            var clockwise = ((d360 + 360 - sd360) % 360) === distance;
+            var r = settings.animateDuration / distance;
+            var delay = 4;
+            var unitDeg = 1;
+
+            if(r >= 4) {
+                delay = parseInt(r);
+            } else if (r >= 1){
+                unitDeg = parseInt(r) * 4;
+            } else {
+                unitDeg = (4 / r);
+            }
+
+            //linear
+            var next = sd360;
+            var count = parseInt(distance / unitDeg);
+
+            onAnimate = true;
+            var animate = function() {
+                next = next + (clockwise ? unitDeg : -unitDeg);
+                next = (next + 360) % 360;
+                if(--count <= 0) {
+                    clearInterval(timer);
+                    onAnimate = false;
+                    next = d360;
+                }
+                setValue(shapes[settings.shape].deg2Val(next));
+            };
+
+            var timer = window.setInterval(animate, delay);
+
+        };
+
         var mousemoveHanlder = function(e) {
             e.stopPropagation();
-            if (!mouseDown) return;
+            if (!mouseDown || onAnimate) return;
 
             var cursor = {
                 x: e.offsetX || e.originalEvent.layerX,
@@ -427,10 +494,7 @@ SOFTWARE.
 
             jcsValue.html(buildLabel(val));
             if (settings.slide && $.isFunction(settings.slide)) settings.slide(slider, val);
-
         };
-
-
 
         jcs.on('mousedown', function(e) {
             mouseDown = true;
@@ -455,12 +519,19 @@ SOFTWARE.
 
             var distance = Math.sqrt(dx * dx + dy * dy);
             if (radius - distance <= jcsOuterArea) {
-                mouseDown = true;
-                mousemoveHanlder(e);
+                if(settings.animate) {
+                    translate(e);
+                } else {
+                    mouseDown = true;
+                    mousemoveHanlder(e);
+                }
             }
             mouseDown = false;
         });
 
+        jcsPanel.on('click', function(e) {
+            jcs.trigger(e);
+        });
 
         jcsPanel.on('mouseup', function(e) {
             jcs.trigger(e);
