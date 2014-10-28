@@ -8,15 +8,7 @@
   "main" : "dist/circular-slider.min",
   "license": "MIT",
   "ignore": [
-    "LICENSE",
-    "node_modules",
-    "bower_components",
-    "Gruntfile.js",
-    "*.json",
-    "README.md",
-    ".gitignore",
-	".git",
-	"src"	
+    "!(dist)"
   ],
   "description" : "Circular slider - a jquery plugin",
   "dependencies": {
@@ -24,9 +16,9 @@
   },
   "keywords": [
     "slider",
-	"circular slider",
-	"image slider",
-	"range slider",
-	"image carousel"
+    "circular slider",
+    "image slider",
+    "range slider",
+    "image carousel"
   ]
 }
