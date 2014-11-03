@@ -324,6 +324,7 @@ SOFTWARE.
         var defaults = {
             radius: 75,
             innerCircleRatio: '0.5',
+            handleDist : 100,
             min: 0,
             max: 359,
             value: 0,
@@ -392,10 +393,12 @@ SOFTWARE.
         var jcsPosition = jcs.position();
         var jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
         var jcsBallOuterArea = jcsIndicator.outerWidth() - jcsIndicator.innerWidth();
-        var jcsRadius = (jcs.width() + jcsOuterArea) / 2;
-        var jcsBallRadius = (jcsIndicator.width() + jcsBallOuterArea) / 2;
+
+        var jcsRadius = (jcs.width() + (jcsOuterArea)/2) / 2;
+        var jcsBallRadius = (jcsIndicator.width() + (jcsBallOuterArea)/2) / 2;
         var jcsCenter = shapes[settings.shape].getCenter(jcsPosition, jcsRadius);
 
+     
         // event binding
         var mouseDown = false;
         var onAnimate = false;
@@ -480,8 +483,9 @@ SOFTWARE.
 
             // change coordinate
 
-            var x = jcsCenter.x + jcsCenter.r * Math.cos(rad) - jcsBallRadius;
-            var y = jcsCenter.y + jcsCenter.r * Math.sin(rad) - jcsBallRadius;
+            var x = jcsCenter.x + ((jcsCenter.r*settings.handleDist)/100) * Math.cos(rad) - jcsBallRadius;
+            var y = jcsCenter.y + ((jcsCenter.r*settings.handleDist)/100) * Math.sin(rad) - jcsBallRadius;
+
 
             jcsIndicator.css({
                 'top': y + "px",
@@ -560,8 +564,8 @@ SOFTWARE.
             var d360 = shapes[settings.shape].val2Deg(val);
             var rad = d360 * Math.PI / 180;
 
-            var x = jcsCenter.x + jcsCenter.r * Math.cos(rad) - jcsBallRadius;
-            var y = jcsCenter.y + jcsCenter.r * Math.sin(rad) - jcsBallRadius;
+            var x = jcsCenter.x + ((jcsCenter.r*settings.handleDist)/100) * Math.cos(rad) - jcsBallRadius;
+            var y = jcsCenter.y + ((jcsCenter.r*settings.handleDist)/100) * Math.sin(rad) - jcsBallRadius;
 
             jcsIndicator.css('top', y + "px");
             jcsIndicator.css('left', x + "px");
