@@ -77,6 +77,9 @@ var slider = $('#slider').CircularSlider();
 ### selectable
 > text selection enabled or not. (default: *false*)
 
+### handleDist
+> Distance between handle and shape center in percentage(default: 100)
+
 ## Callback
 ### function slide(ui, value)
 > `slide` callback is triggered whenever there is a change in sliding value.
@@ -104,6 +107,7 @@ Slider with default values
 var slider = $('#slider').CircularSlider({
     radius: 75,
     innerCircleRatio: '0.5',
+    handleDist: 100,
     min: 0,
     max: 359,
     value: 0,

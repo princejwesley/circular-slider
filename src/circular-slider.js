@@ -365,6 +365,9 @@ SOFTWARE.
             if (settings.animate && ((settings.animateDuration | 0) !== settings.animateDuration ||
                 settings.animateDuration < 0))
                 throw "Invalid animate duration(in ms) : " + settings.animateDuration;
+
+            if (((settings.handleDist | 0) !== settings.handleDist) || settings.handleDist <= 0 || settings.handleDist > 100)
+                settings.handleDist = defaults.handleDist;
         };
 
         validateSettings();
@@ -398,7 +401,7 @@ SOFTWARE.
         var jcsBallRadius = (jcsIndicator.width() + (jcsBallOuterArea)/2) / 2;
         var jcsCenter = shapes[settings.shape].getCenter(jcsPosition, jcsRadius);
 
-     
+
         // event binding
         var mouseDown = false;
         var onAnimate = false;
