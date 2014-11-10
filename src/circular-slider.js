@@ -31,6 +31,9 @@ SOFTWARE.
         if (slider.find('div.jcs-panel').length !== 0) throw "Already Created!!!";
 
         var drawIndicatorBall = function(jcsComponents, radius) {
+            if(jcsComponents.jcsIndicator.width() && jcsComponents.jcsIndicator.height())
+                return;
+            
             jcsComponents.jcsIndicator.css({
                 'width': (radius / 5) + "px",
                 'height': (radius / 5) + "px",
