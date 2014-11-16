@@ -598,6 +598,21 @@ SOFTWARE.
             if (touches.length > 1) return;
 
             var touch = touches[0];
+            var target = $(touch.target);
+
+            if(!target.hasClass('jcs')) return;
+
+            var offset = target.offset();
+            var width = target.width();
+            var height = target.height();
+
+            var clientX = touch.clientX;
+            var clientY = touch.clientY;
+
+            if( clientX < offset.left || clientX > width + offset.left ||
+                clientY < offset.top  || clientY > height + offset.top)
+                return;
+
             var events = ["touchstart", "touchmove", "touchend"];
             var mouseEvents = ["mousedown", "mousemove", "mouseup"];
             var ev = events.indexOf(e.type);
