@@ -80,6 +80,13 @@ var slider = $('#slider').CircularSlider();
 ### handleDist
 > Distance between handle and shape center in percentage(default: 100)
 
+## Functions
+### function setValue(value)
+> Set current `value` of the slider.
+
+### function getValue()
+> Get current `value` of the slider.
+
 ## Callback
 ### function slide(ui, value)
 > `slide` callback is triggered whenever there is a change in sliding value.
