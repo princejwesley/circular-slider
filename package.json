@@ -1,6 +1,7 @@
 {
-	"name": "ciruclar-slider.js",
+	"name": "circular-slider",
 	"version": "1.0.3",
+	"author": "prince john wesley <princejohnwesley@gmail.com>",
 	"description": "Circular slider - a jquery plugin",
 	"devDependencies": {
 		"grunt": "~0.4.5",
