@@ -11,5 +11,12 @@
 		"grunt-contrib-cssmin" : "*",
 		"grunt-autoprefixer" : "*"
 
-	}
+	},
+	"keywords": [
+		"slider",
+		"circular slider",
+		"image slider",
+		"range slider",
+		"image carousel"
+	]
 }
