@@ -400,8 +400,8 @@ SOFTWARE.
         var jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
         var jcsBallOuterArea = jcsIndicator.outerWidth() - jcsIndicator.innerWidth();
 
-        var jcsRadius = (jcs.width() + (jcsOuterArea)/2) / 2;
-        var jcsBallRadius = (jcsIndicator.width() + (jcsBallOuterArea)/2) / 2;
+        var jcsRadius = (jcs.width() + jcsOuterArea) / 2;
+        var jcsBallRadius = (jcsIndicator.width() + jcsBallOuterArea) / 2;
         var jcsCenter = shapes[settings.shape].getCenter(jcsPosition, jcsRadius);
 
 
