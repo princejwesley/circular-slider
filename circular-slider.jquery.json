@@ -1,6 +1,6 @@
 {
     "name" : "circular-slider",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "title": "A circular slider",
     "description" : "Circular slider for range values and image carousel. It supports half/full circles",
     "author": {

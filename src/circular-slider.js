@@ -33,7 +33,7 @@ SOFTWARE.
         var drawIndicatorBall = function(jcsComponents, radius) {
             if(jcsComponents.jcsIndicator.width() && jcsComponents.jcsIndicator.height())
                 return;
-            
+
             jcsComponents.jcsIndicator.css({
                 'width': (radius / 5) + "px",
                 'height': (radius / 5) + "px",
@@ -375,7 +375,7 @@ SOFTWARE.
 
         validateSettings();
 
-        var range = settings.max - settings.min + 1;
+        var range = Math.abs(settings.max - settings.min + 1);
 
         var jcsPanel = $('<div class="jcs-panel"><div class="jcs"><span class="jcs-value"></span></div><div class="jcs-indicator"> </div></div>');
         jcsPanel.appendTo(slider);
@@ -590,6 +590,20 @@ SOFTWARE.
             return Object.keys();
         };
 
+        var setRange = function(min, max) {
+            if ((min | 0) !== min) throw "Invalid min value : " + min;
+            if ((max | 0) !== max) throw "Invalid max value : " + max;
+            if (max < min) throw "Min range should be less than max";
+
+            settings.min = min;
+            settings.max = max;
+            range = Math.abs(settings.max - settings.min + 1);
+
+            var value = settings.value;
+            if(value < min || value > max)  value = min;
+            setValue(value);
+        };
+
         var lastTouchType = '';
         var touchHandler = function(e) {
             var touches = e.changedTouches;
@@ -654,6 +668,7 @@ SOFTWARE.
             "setValue": setValue,
             "getValue": getValue,
             "getSupportedShapes": getSupportedShapes,
+            "setRange": setRange,
         });
 
     };

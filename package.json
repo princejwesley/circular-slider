@@ -1,6 +1,6 @@
 {
 	"name": "circular-slider",
-	"version": "1.0.3",
+	"version": "1.0.4",
 	"author": "prince john wesley <princejohnwesley@gmail.com>",
 	"description": "Circular slider - a jquery plugin",
 	"devDependencies": {

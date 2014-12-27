@@ -87,6 +87,9 @@ var slider = $('#slider').CircularSlider();
 ### function getValue()
 > Get current `value` of the slider.
 
+### function setRange(min, max)
+> Set sliding range of the slider. `min` is a minimum value and `max` is a maximum sliding value. If the current `value` is not in range, `min` will be set as current `value`
+
 ## Callback
 ### function slide(ui, value)
 > `slide` callback is triggered whenever there is a change in sliding value.
