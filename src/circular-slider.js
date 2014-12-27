@@ -375,7 +375,7 @@ SOFTWARE.
 
         validateSettings();
 
-        var range = Math.abs(settings.max - settings.min + 1);
+        var range = settings.max - settings.min + 1;
 
         var jcsPanel = $('<div class="jcs-panel"><div class="jcs"><span class="jcs-value"></span></div><div class="jcs-indicator"> </div></div>');
         jcsPanel.appendTo(slider);
@@ -597,7 +597,7 @@ SOFTWARE.
 
             settings.min = min;
             settings.max = max;
-            range = Math.abs(settings.max - settings.min + 1);
+            range = settings.max - settings.min + 1;
 
             var value = settings.value;
             if(value < min || value > max)  value = min;
