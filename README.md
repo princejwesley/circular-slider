@@ -2,6 +2,7 @@
 ===============
 Circular slider is a jQuery plugin which helps to slide range of values and images. It supports half(top/bottom/up/down) and full circle shapes.
 #####[Demo Page](http://www.toolitup.com/circular-slider.html)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/princejwesley/circular-slider)
 
 
 ![circular slider](http://www.toolitup.com/assets/images/circular-slider-demo.png)
