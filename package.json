@@ -1,6 +1,7 @@
 {
-	"name": "ciruclar-slider.js",
-	"version": "1.0.2",
+	"name": "circular-slider",
+	"version": "1.0.4",
+	"author": "prince john wesley <princejohnwesley@gmail.com>",
 	"description": "Circular slider - a jquery plugin",
 	"devDependencies": {
 		"grunt": "~0.4.5",
@@ -11,5 +12,12 @@
 		"grunt-contrib-cssmin" : "*",
 		"grunt-autoprefixer" : "*"
 
-	}
+	},
+	"keywords": [
+		"slider",
+		"circular slider",
+		"image slider",
+		"range slider",
+		"image carousel"
+	]
 }

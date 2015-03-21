@@ -2,6 +2,7 @@
 ===============
 Circular slider is a jQuery plugin which helps to slide range of values and images. It supports half(top/bottom/up/down) and full circle shapes.
 #####[Demo Page](http://www.toolitup.com/circular-slider.html)
+[![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/princejwesley/circular-slider)
 
 
 ![circular slider](http://www.toolitup.com/assets/images/circular-slider-demo.png)
@@ -79,6 +80,16 @@ var slider = $('#slider').CircularSlider();
 
 ### handleDist
 > Distance between handle and shape center in percentage(default: 100)
+
+## Functions
+### function setValue(value)
+> Set current `value` of the slider.
+
+### function getValue()
+> Get current `value` of the slider.
+
+### function setRange(min, max)
+> Set sliding range of the slider. `min` is a minimum value and `max` is a maximum sliding value. If the current `value` is not in range, `min` will be set as current `value`
 
 ## Callback
 ### function slide(ui, value)

@@ -33,7 +33,7 @@ SOFTWARE.
         var drawIndicatorBall = function(jcsComponents, radius) {
             if(jcsComponents.jcsIndicator.width() && jcsComponents.jcsIndicator.height())
                 return;
-            
+
             jcsComponents.jcsIndicator.css({
                 'width': (radius / 5) + "px",
                 'height': (radius / 5) + "px",
@@ -400,8 +400,8 @@ SOFTWARE.
         var jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
         var jcsBallOuterArea = jcsIndicator.outerWidth() - jcsIndicator.innerWidth();
 
-        var jcsRadius = (jcs.width() + (jcsOuterArea)/2) / 2;
-        var jcsBallRadius = (jcsIndicator.width() + (jcsBallOuterArea)/2) / 2;
+        var jcsRadius = (jcs.width() + jcsOuterArea) / 2;
+        var jcsBallRadius = (jcsIndicator.width() + jcsBallOuterArea) / 2;
         var jcsCenter = shapes[settings.shape].getCenter(jcsPosition, jcsRadius);
 
 
@@ -619,6 +619,20 @@ SOFTWARE.
             return Object.keys();
         };
 
+        var setRange = function(min, max) {
+            if ((min | 0) !== min) throw "Invalid min value : " + min;
+            if ((max | 0) !== max) throw "Invalid max value : " + max;
+            if (max < min) throw "Min range should be less than max";
+
+            settings.min = min;
+            settings.max = max;
+            range = settings.max - settings.min + 1;
+
+            var value = settings.value;
+            if(value < min || value > max)  value = min;
+            setValue(value);
+        };
+
         var lastTouchType = '';
         var touchHandler = function(e) {
             var touches = e.changedTouches;
@@ -685,6 +699,7 @@ SOFTWARE.
             "getSupportedShapes": getSupportedShapes,
 			"setRadius": setRadius,
 			"getRadius": getRadius,
+            "setRange": setRange,
         });
 
     };
