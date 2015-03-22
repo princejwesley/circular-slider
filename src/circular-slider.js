@@ -568,7 +568,7 @@ SOFTWARE.
                 'height': (radius / 5) + "px",
             });
 			
-			// Re-calculate global variables based on new radius
+			// Re-calculate variables based on new radius
 		    jcsPosition = jcs.position();
 			jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
 			jcsBallOuterArea = jcsIndicator.outerWidth() - jcsIndicator.innerWidth();
@@ -605,6 +605,8 @@ SOFTWARE.
         };
 
 		var setRadius = function(newRadius) {
+			if (isNaN(newRadius)) throw "Invalid Radius value: " + newRadius;
+			
 			settings.radius = Math.abs(parseInt(newRadius));
 			radius = settings.radius;
 			//re-draw circles
