@@ -561,6 +561,25 @@ SOFTWARE.
             return settings.formLabel ? settings.formLabel(value, settings.labelPrefix, settings.labelSuffix) : settings.labelPrefix + value + settings.labelSuffix;
         };
 
+		var redraw = function() {
+			shapes[settings.shape].drawShape(jcsComponents, radius);
+			jcsComponents.jcsIndicator.css({
+                'width': (radius / 5) + "px",
+                'height': (radius / 5) + "px",
+            });
+			
+			// Re-calculate variables based on new radius
+		    jcsPosition = jcs.position();
+			jcsOuterArea = jcs.outerWidth() - jcs.innerWidth();
+			jcsBallOuterArea = jcsIndicator.outerWidth() - jcsIndicator.innerWidth();
+	
+			jcsRadius = (jcs.width() + jcsOuterArea) / 2;
+			jcsBallRadius = (jcsIndicator.width() + jcsBallOuterArea) / 2;
+			jcsCenter = shapes[settings.shape].getCenter(jcsPosition, jcsRadius);
+
+			setValue(settings.value || settings.min);
+		};
+		
         var setValue = function(value) {
 
             if (((value | 0) !== value)) throw "Invalid input (expected integer) : " + value;
@@ -585,7 +604,19 @@ SOFTWARE.
             return settings.value;
         };
 
+		var setRadius = function(newRadius) {
+			if (isNaN(newRadius)) throw "Invalid Radius value: " + newRadius;
+			
+			settings.radius = Math.abs(parseInt(newRadius));
+			radius = settings.radius;
+			//re-draw circles
+			redraw();
+		};
 
+		var getRadius = function() {
+			return settings.radius;
+		};
+		
         var getSupportedShapes = function() {
             return Object.keys();
         };
@@ -668,6 +699,8 @@ SOFTWARE.
             "setValue": setValue,
             "getValue": getValue,
             "getSupportedShapes": getSupportedShapes,
+			"setRadius": setRadius,
+			"getRadius": getRadius,
             "setRange": setRange,
         });
 
