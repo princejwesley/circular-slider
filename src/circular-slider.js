@@ -626,18 +626,17 @@ SOFTWARE.
             settings.animateDuration = duration;
         };
 
-		var setRadius = function(newRadius) {
-			if (isNaN(newRadius)) throw "Invalid Radius value: " + newRadius;
-			
-			settings.radius = Math.abs(parseInt(newRadius));
-			radius = settings.radius;
-			//re-draw circles
-			redraw();
-		};
+        var setRadius = function(newRadius) {
+            if (isNaN(newRadius)) throw "Invalid Radius value: " + newRadius;
+            settings.radius = Math.abs(parseInt(newRadius));
+            radius = settings.radius;
+            //re-draw circles
+            redraw();
+        };
 
-		var getRadius = function() {
-			return settings.radius;
-		};
+        var getRadius = function() {
+            return settings.radius;
+        };
 		
         var getSupportedShapes = function() {
             return Object.keys();
