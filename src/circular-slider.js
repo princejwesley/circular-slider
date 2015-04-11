@@ -365,12 +365,14 @@ SOFTWARE.
             if (!settings.innerCircleRatio || settings.innerCircleRatio < 0.1 || settings.innerCircleRatio > 0.9)
                 throw "Invalid innerCircleRatio. Expected: between 0.1 and 0.9, Found: " + settings.innerCircleRatio;
 
-            if (settings.animate && ((settings.animateDuration | 0) !== settings.animateDuration ||
-                settings.animateDuration < 0))
+            if ((settings.animateDuration | 0) !== settings.animateDuration ||
+                settings.animateDuration < 0)
                 throw "Invalid animate duration(in ms) : " + settings.animateDuration;
 
             if (((settings.handleDist | 0) !== settings.handleDist) || settings.handleDist <= 0 || settings.handleDist > 100)
                 settings.handleDist = defaults.handleDist;
+
+            setting.animate = !!setting.animate;
         };
 
         validateSettings();
@@ -604,6 +606,26 @@ SOFTWARE.
             return settings.value;
         };
 
+        var getAnimate = function() {
+            return settings.animate;
+        };
+
+        var setAnimate = function(animate) {
+            settings.animate = !!animate;
+        };
+
+        var getAnimateDuration = function() {
+            return settings.animateDuration;
+        };
+
+        var setAnimateDuration = function(duration) {
+            if ((duration | 0) !== duration ||
+                duration < 0)
+                throw "Invalid animate duration(in ms) : " + duration;
+
+            settings.animateDuration = duration;
+        };
+
 		var setRadius = function(newRadius) {
 			if (isNaN(newRadius)) throw "Invalid Radius value: " + newRadius;
 			
@@ -702,6 +724,11 @@ SOFTWARE.
 			"setRadius": setRadius,
 			"getRadius": getRadius,
             "setRange": setRange,
+            "getAnimateDuration": getAnimateDuration,
+            "setAnimateDuration": setAnimateDuration,
+            "setAnimate": setAnimate,
+            "getAnimate": getAnimate,
+
         });
 
     };
