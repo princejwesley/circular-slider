@@ -372,7 +372,7 @@ SOFTWARE.
             if (((settings.handleDist | 0) !== settings.handleDist) || settings.handleDist <= 0 || settings.handleDist > 100)
                 settings.handleDist = defaults.handleDist;
 
-            setting.animate = !!setting.animate;
+            settings.animate = !!settings.animate;
         };
 
         validateSettings();
