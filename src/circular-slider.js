@@ -519,7 +519,6 @@ SOFTWARE.
         jcs.on('mouseup', function(e) {
             mouseDown = false;
             e.stopPropagation();
-            onSlideEnd();
         });
         jcs.on('mousemove', mousemoveHanlder);
 
@@ -542,7 +541,7 @@ SOFTWARE.
                     mousemoveHanlder(e);
                     onSlideEnd();
                 }
-            }
+            } else  onSlideEnd();
             mouseDown = false;
         });
 
