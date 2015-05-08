@@ -340,6 +340,7 @@ SOFTWARE.
             animateDuration : 360,
             selectable: false,
             slide: function(ui, value) {},
+            onSlideEnd: function(ui, value) {},
             formLabel: undefined
         };
 
@@ -466,6 +467,7 @@ SOFTWARE.
                     next = d360;
                 }
                 setValue(shapes[settings.shape].deg2Val(next));
+                if(!onAnimate) onSlideEnd();
             };
 
             var timer = window.setInterval(animate, delay);
@@ -517,6 +519,7 @@ SOFTWARE.
         jcs.on('mouseup', function(e) {
             mouseDown = false;
             e.stopPropagation();
+            onSlideEnd();
         });
         jcs.on('mousemove', mousemoveHanlder);
 
@@ -537,6 +540,7 @@ SOFTWARE.
                 } else {
                     mouseDown = true;
                     mousemoveHanlder(e);
+                    onSlideEnd();
                 }
             }
             mouseDown = false;
@@ -600,6 +604,11 @@ SOFTWARE.
 
             if (settings.slide && $.isFunction(settings.slide)) settings.slide(slider, val);
 
+        };
+
+        var onSlideEnd = function() {
+            if (settings.onSlideEnd && $.isFunction(settings.onSlideEnd))
+                settings.onSlideEnd(slider, settings.value);
         };
 
         var getValue = function() {

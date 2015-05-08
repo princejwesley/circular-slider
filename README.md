@@ -119,6 +119,15 @@ ui -  dom element
 value - Current sliding value
 ```
 
+### function onSlideEnd(ui, value)
+> `onSlideEnd` callback is triggered when the user action is done (on mouse up/touch end or click).
+
+Parameters:
+```
+ui -  dom element
+value - Current sliding value
+```
+
 ### function formLabel(value, prefix, suffix)
 > `formLabel` callback is triggered with current sliding value, prefix and suffix.
 If it is defined, it will be used as a source for inner circle area.
@@ -149,6 +158,7 @@ var slider = $('#slider').CircularSlider({
     animateDuration : 360,
     selectable: false,
     slide: function(ui, value) {},
+    onSlideEnd: function(ui, value) {},
     formLabel: undefined
 });
 ```
