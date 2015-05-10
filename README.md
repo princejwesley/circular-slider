@@ -7,6 +7,8 @@ Circular slider is a jQuery plugin which helps to slide range of values and imag
 
 ![circular slider](http://www.toolitup.com/assets/images/circular-slider-demo.png)
 
+For angular version(without JQuery dependency), [**Try Angular Circular Slider**](https://github.com/princejwesley/angular-circular-slider)
+
 ## Getting Started
 
 ### Download the latest code
