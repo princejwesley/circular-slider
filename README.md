@@ -62,11 +62,11 @@ var slider = $('#slider').CircularSlider();
 #### shape
 > `shape` of the slider. Supported shapes are:
 
-1. `'circle'` (*default*)
-2. `'half circle'`
-3. `'half circle left'`
-4. `'half circle right'`
-5. `'half circle bottom'`
+1. `'Circle'` (*default*)
+2. `'Half Circle'`
+3. `'Half Circle Left'`
+4. `'Half Circle Right'`
+5. `'Half Circle Bottom'`
 
 ### touch
 > `touch` support. (default: *true*)
