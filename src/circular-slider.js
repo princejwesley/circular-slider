@@ -516,7 +516,7 @@ SOFTWARE.
             mouseDown = true;
             e.stopPropagation();
         });
-        jcs.on('mouseup', function(e) {
+        jcs.on('mouseup mouseleave', function(e) {
             mouseDown = false;
             e.stopPropagation();
         });
@@ -545,19 +545,7 @@ SOFTWARE.
             mouseDown = false;
         });
 
-        jcsPanel.on('click', function(e) {
-            jcs.trigger(e);
-        });
-
-        jcsPanel.on('mouseup', function(e) {
-            jcs.trigger(e);
-        });
-
-        jcsPanel.on('mousemove', function(e) {
-            jcs.trigger(e);
-        });
-
-        jcsPanel.on('mousedown', function(e) {
+        jcsPanel.on('click mouseup mousemove mousedown mouseleave', function(e) {
             jcs.trigger(e);
         });
 
@@ -687,8 +675,8 @@ SOFTWARE.
                 clientY < offset.top  || clientY > height + offset.top)
                 return;
 
-            var events = ["touchstart", "touchmove", "touchend"];
-            var mouseEvents = ["mousedown", "mousemove", "mouseup"];
+            var events = ["touchstart", "touchmove", "touchend", "touchcancel"];
+            var mouseEvents = ["mousedown", "mousemove", "mouseup", "mouseleave"];
             var ev = events.indexOf(e.type);
 
             if (ev === -1) return;
